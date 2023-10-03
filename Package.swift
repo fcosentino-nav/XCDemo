@@ -14,13 +14,16 @@ let package = Package(
             targets: ["MapboxMaps"])
     ],
     targets: [
-        .binaryTarget(
+         .binaryTarget(
+            name: "MapboxCoreMaps",
+            path: "MapboxCoreMaps.xcframework"),
+        .target(
             name: "MapboxMaps",
             dependencies: [
                 "MapboxCoreMaps",
                 .product(name: "MapboxCommon", package: "mapbox-common-ios"),
                 .product(name: "Turf", package: "turf-swift")
-            ]
+            ],
             path: "MapboxMaps.xcframework")
     ]
 )
