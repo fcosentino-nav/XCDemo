@@ -1,17 +1,20 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
-// swift-module-flags: -target arm64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MapboxCommon
+// swift-compiler-version: Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)
+// swift-module-flags: -target arm64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MapboxCommon
+// swift-module-flags-ignorable: -enable-bare-slash-regex
 import Foundation
 @_exported import MapboxCommon
 import Swift
-extension DownloadError : Foundation.LocalizedError {
+import _Concurrency
+import _StringProcessing
+extension MapboxCommon.DownloadError : Foundation.LocalizedError {
   public var errorDescription: Swift.String? {
     get
   }
 }
-extension DownloadStatus {
-  public convenience init(downloadId: Swift.UInt64, state: MapboxCommon.DownloadState, error: MapboxCommon.DownloadError?, totalBytes: Swift.UInt64?, receivedBytes: Swift.UInt64, transferredBytes: Swift.UInt64, downloadOptions: MapboxCommon.DownloadOptions, httpResult: Swift.Result<MapboxCommon.HttpResponseData, MapboxCommon.HttpRequestError>?)
-  public convenience init(error: MapboxCommon.DownloadError?, totalBytes: Swift.UInt64?, downloadOptions: MapboxCommon.DownloadOptions, httpResult: Swift.Result<MapboxCommon.HttpResponseData, MapboxCommon.HttpRequestError>?)
+extension MapboxCommon.DownloadStatus {
+  convenience public init(downloadId: Swift.UInt64, state: MapboxCommon.DownloadState, error: MapboxCommon.DownloadError?, totalBytes: Swift.UInt64?, receivedBytes: Swift.UInt64, transferredBytes: Swift.UInt64, downloadOptions: MapboxCommon.DownloadOptions, httpResult: Swift.Result<MapboxCommon.HttpResponseData, MapboxCommon.HttpRequestError>?)
+  convenience public init(error: MapboxCommon.DownloadError?, totalBytes: Swift.UInt64?, downloadOptions: MapboxCommon.DownloadOptions, httpResult: Swift.Result<MapboxCommon.HttpResponseData, MapboxCommon.HttpRequestError>?)
   public var httpResult: Swift.Result<MapboxCommon.HttpResponseData, MapboxCommon.HttpRequestError>? {
     get
   }
@@ -19,13 +22,13 @@ extension DownloadStatus {
     get
   }
 }
-extension HttpRequestError : Foundation.LocalizedError {
+extension MapboxCommon.HttpRequestError : Foundation.LocalizedError {
   public var errorDescription: Swift.String? {
     get
   }
 }
-extension HttpResponse {
-  public convenience init(request: MapboxCommon.HttpRequest, result: Swift.Result<MapboxCommon.HttpResponseData, MapboxCommon.HttpRequestError>)
+extension MapboxCommon.HttpResponse {
+  convenience public init(request: MapboxCommon.HttpRequest, result: Swift.Result<MapboxCommon.HttpResponseData, MapboxCommon.HttpRequestError>)
   public var result: Swift.Result<MapboxCommon.HttpResponseData, MapboxCommon.HttpRequestError> {
     get
   }
@@ -34,7 +37,7 @@ public struct SettingsServiceError : Swift.Equatable, Swift.Error {
   public init(description: Swift.String)
   public static func == (a: MapboxCommon.SettingsServiceError, b: MapboxCommon.SettingsServiceError) -> Swift.Bool
 }
-extension SettingsServiceError : Foundation.LocalizedError {
+extension MapboxCommon.SettingsServiceError : Foundation.LocalizedError {
   public var errorDescription: Swift.String? {
     get
   }
@@ -46,6 +49,6 @@ public protocol SettingsServiceInterface {
   func erase(key: Swift.String) -> Swift.Result<Swift.Void, MapboxCommon.SettingsServiceError>
   func has(key: Swift.String) -> Swift.Result<Swift.Bool, MapboxCommon.SettingsServiceError>
 }
-extension SettingsServiceFactory {
+extension MapboxCommon.SettingsServiceFactory {
   public static func getInstance(storageType: MapboxCommon.SettingsServiceStorageType) -> MapboxCommon.SettingsServiceInterface
 }

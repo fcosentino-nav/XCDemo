@@ -6,6 +6,6 @@ framework module MapboxMaps {
 }
 
 module MapboxMaps.Swift {
-    header "MapboxMaps-Swift.h"
-    requires objc
+  header "MapboxMaps-Swift.h"
+  requires objc
 }

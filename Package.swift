@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "MapboxMaps",
     platforms: [
-        .iOS(.v11)
+        .iOS(.v13)
     ],
     products: [
         .library(
@@ -16,6 +16,11 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "MapboxMaps",
+            dependencies: [
+                "MapboxCoreMaps",
+                .product(name: "MapboxCommon", package: "mapbox-common-ios"),
+                .product(name: "Turf", package: "turf-swift")
+            ]
             path: "MapboxMaps.xcframework")
     ]
 )
